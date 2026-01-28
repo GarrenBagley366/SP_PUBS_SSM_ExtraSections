@@ -4,11 +4,11 @@ The Extra Section engine
 ```mermaid
 flowchart TD
   %% Sources
-  SABRE["SABRE Schedule Change Feed"] --> MQ["IBM MQ / Casper input queues"]
+  SABRE["SABRE Schedule change feed via IBM MQ"] --> MQ["IBM MQ"]
 
   %% Generator
-  subgraph GEN["FltInvhub_Schedule_FileGenerator (Spring/Maven)"]
-    MQ --> G1["Consume MQ messages"]
+  subgraph GEN["SP_PUBS_SSM_ExtraSections (Spring/Maven)"]
+    MQ --> G1["Scheduled Trigger (cron/SpringScheduler) Consume IBM MQ messages"]
     G1 --> G2["Parse schedule message"]
     G2 --> G3["Insert/Update SCHEDULE_MESSAGE<br/>(status management)"]
     G2 -->|END REAC| G4["Update WEEKLY_REACCOM_COMPLETED_DATE<br/>+ mark PROCESSED"]
@@ -33,12 +33,6 @@ flowchart TD
     P4 --> P7["Validate OA code populated for all flights in SCHEDULE"]
     P4 --> P8["Create Thruflight messages"]
     P8 --> EH["Event Hub topic (output binding)"]
-  end
-
-  %% Maintenance
-
-  subgraph MAINT["Maintenance"]
-    C1{"Weekly scheduled"} --> C2["scheduleMessageCleanupTuesday<br/>Delete SCHEDULE_MESSAGE entries older than 45 days<br/>(Tuesday 11pm)"]
   end
 
 ```
