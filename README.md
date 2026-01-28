@@ -12,7 +12,7 @@ flowchart TD
     G1 --> G2["Parse schedule message"]
     click G2 href "https://github.com/AAInternal/FltInvhub_Schedule_FileProcessor/wiki/File-Processor-Business-Rules"
     G2 --> G3["Insert/Update SCHEDULE_MESSAGE<br/>(status management)"]
-    G2 -->|END REAC| G4["Update WEEKLY_REACCOM_COMPLETED_DATE<br/>+ mark PROCESSED"]
+    G2 -->|Original Format| G4["Store Flight in Original Screen Format for archive<br/>"]
 
     G5{"Cron triggers"} --> G6["Validate prerequisites<br/>- not already generated today (SCHED_FILE_PROCESSING_COMPLETED_DATE)<br/>- FLIGHT_ID not running<br/>- MRU/INIT not in progress<br/>- weekend MRU completed / INIT completed timing checks"]
     G6 --> G7["Select PENDING messages<br/>sleep 30s<br/>re-select by clock-time window"]
