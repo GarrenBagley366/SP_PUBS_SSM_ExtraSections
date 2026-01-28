@@ -10,6 +10,7 @@ flowchart TD
   subgraph GEN["SP_PUBS_SSM_ExtraSections (Spring/Maven)"]
     MQ --> G1["Scheduled Trigger (cron/SpringScheduler) Consume IBM MQ messages"]
     G1 --> G2["Parse schedule message"]
+    click G2 href "https://github.com/AAInternal/FltInvhub_Schedule_FileProcessor/wiki/File-Processor-Business-Rules"
     G2 --> G3["Insert/Update SCHEDULE_MESSAGE<br/>(status management)"]
     G2 -->|END REAC| G4["Update WEEKLY_REACCOM_COMPLETED_DATE<br/>+ mark PROCESSED"]
 
