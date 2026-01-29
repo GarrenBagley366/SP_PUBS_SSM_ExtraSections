@@ -40,6 +40,6 @@ G6["Validate prerequisites<br/>- not already generated today (SCHED_FILE_PROCESS
   %% Edges
   G3 --> SB
   G4 --> FA
-  FA --> G6
+  SB --> G6
 
 ```
