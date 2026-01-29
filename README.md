@@ -57,8 +57,6 @@ G6["Validate prerequisites<br/>- not already generated today (SCHED_FILE_PROCESS
 - How about an email copy of every update? To whom would this go?
 
 ### This is an example of an extra section from the SabreMQ
-<br>
-A AA 9603  01J10JAN2610JAN26     6  BOG09000900-0500  MIA13001300-0500  7M8CJRDIUYBHKMLGVSNQOET     XX                 II     <br>                                                          E210F2A317BAF2094 AA 9603  01J                801BOGMIAMAX                                                                    <br>                                                         E210F2A317BBB8094 AA 9603  01J                109BOGMIAV V V V V V V V V V V V V V V V V V V V                            <br>                                                                 E210F2A317BBBC094 AA 9603  01J                106BOGMIAC016J016R014D012I008U002Y156B148H136K123M103L090G061V047S039N031Q027O023E008T003<br>                                                    E210F2A317BBC6095 AA        9603        <br>                                                                                                                                                   E210F2A317DDBC09<br><br><br>
 
 ```json
 {
@@ -72,6 +70,10 @@ A AA 9603  01J10JAN2610JAN26     6  BOG09000900-0500  MIA13001300-0500  7M8CJRDI
   "msgReceivedTime": "2026-01-09 19:51:30.424"
 }
 ```
+<br>
+A AA 9603  01J10JAN2610JAN26     6  BOG09000900-0500  MIA13001300-0500  7M8CJRDIUYBHKMLGVSNQOET     XX                 II                                                               E210F2A317BAF2094<br> AA 9603  01J                801BOGMIAMAX                                                                                                                                              E210F2A317BBB8094<br> AA 9603  01J                109BOGMIAV V V V V V V V V V V V V V V V V V V V                                                                                                          E210F2A317BBBC094<br AA 9603  01J                106BOGMIAC016J016R014D012I008U002Y156B148H136K123M103L090G061V047S039N031Q027O023E008T003                                                                 E210F2A317BBC6095 AA        9603                                                                                                                                                                        E210F2A317DDBC09
+<br>
+
 [Schedule File Processor application:](https://github.com/AAInternal/FltInvhub_Schedule_FileProcessor/)
 
 [Business Rules wiki:](https://github.com/AAInternal/FltInvhub_Schedule_FileProcessor/wiki/File-Processor-Business-Rules)
