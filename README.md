@@ -1,9 +1,13 @@
 # SP_PUBS_SSM_ExtraSections
 
-### The Extra Section Engine is a stand-alone SpringBoot/Kubernetes application running on a Production Publications Azure node. A SpringScheduler configuration prompts the Engine to regularly poll a SabreMQ via an IBM MQ schedule Upates. Extra sections are determined via flight range.  The Sabre green screen formatted data is effectively screen scraped and reformatted to an IATA standard SSM format in a file then transmitted to ITA via the existing NPPortal/EMFT file transfer system used for the Publications ITA SSIM transmits.
+## The Extra Section Engine consumes IBM MQ messages and sends the extra sections to ITA google via EMFT
+
+### The Extra Section Engine is a stand-alone SpringBoot/Kubernetes application running on a Production Publications Azure node. A SpringScheduler configuration prompts the Engine to regularly poll a SabreMQ via an IBM MQ schedule Upates. Extra sections are determined via flight range.  The Sabre green screen formatted data is effectively screen scraped and reformatted to an IATA standard SSM format in a file then each file is transmitted to ITA via EMFT with a new NPPortal/EMFT jobs ismilar to the existing NPPortal/EMFT file transfer system used for the Publications ITA SSIM transmits.
 
 ### Each extra session processed is archived to a dated file with the original green screen format and the resulting SSM format, a copy of this is included with a notification emailed to a configurable list of email recipients.
 
+#### Assumptions
+* Once moved to production there is no human interaction to decide if an extra section is published, this is unlike Publications SABRE SSM
 
 ## Flowchart
 
@@ -56,7 +60,7 @@ G6["Validate prerequisites<br/>- not already generated today (SCHED_FILE_PROCESS
 - **Should we Reuse this SP_PUBS_SSM_SWS_API or duplicate it? Duplication means duplicating a lot of boilerplate code.**
 - How about an email copy of every update? To whom would this go?
 
-### This is an example of an extra section from the SabreMQ
+### This is an example of an extra section from the SabreMQ in Casper's json message formatting.
 
 ```json
 {
