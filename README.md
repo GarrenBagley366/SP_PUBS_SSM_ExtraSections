@@ -35,6 +35,7 @@ G6["Validate prerequisites<br/>- not already generated today (SCHED_FILE_PROCESS
 
   subgraph DIR["/aa-pubs-extrasection"]
     FA["Extra_Section_Schedule_File_20260122_010031.json"]
+    click FA "javascript:void(0)" "Entry point for the app"
   end
 
   %% Edges
