@@ -25,7 +25,7 @@ flowchart TD
     MQ --> G1["Scheduled Trigger (cron/SpringScheduler) Consume IBM MQ messages"]
     G1 --> G2["Parse schedule message"]
     click G2 href "https://github.com/AAInternal/FltInvhub_Schedule_FileProcessor/wiki/File-Processor-Business-Rules"
-G2 --> G2A["Validate prerequisites<br/> - Matches Extra Section Flight Range
+G2 --> G2A["EBCDIC to ASCII encoding<br\> - <br\>Validate prerequisites<br/> - Matches Extra Section Flight Range
 <pre>
 Message starts with A → ssimType = ADD
 Message starts with D → ssimType = DELETE
@@ -33,7 +33,7 @@ Message starts with I → ssimType = INIT
 Message starts with 6 → ssimType = TYPE6
 </pre><br/>
 - not already generated today (SCHED_FILE_PROCESSING_COMPLETED_DATE)<br/>"]
-    G2A --> G3["Insert/Update SCHEDULE_MESSAGE<br/>(status management)"]
+    G2A --> G3["ADD/DEL SCHEDULE_MESSAGE<br/>(status management)"]
     G2A -->|Original Format| G4["Store Flight in Original Screen Format for archive<br/>"]
     
      G8["Build SSM payload<br/> SSMExtraSection.dat"]
@@ -49,12 +49,16 @@ Message starts with 6 → ssimType = TYPE6
   end
 
   subgraph DIRT["/aa-pubs-extrasection"]
-    FB["SSMExtraSection_20260122_010031.txt"]
+    FB["SSMExtraSection_20260122_010031.dat"]
   end
 
   %% Message Bus
   subgraph NPPortal
-    FT["aa-pubs-transmit - manifest.dat.20260122085603 - PUBS[ITASSM] - /mnt/Transfer/PUBS/ITASSM/Outbound "]
+    FT["<pre>aa-pubs-transmit
+- manifest.dat.20260122085603
+- SSMExtraSection_20260122_010031.dat+ITASSM+3084383
+- PUBS[ITASSM]
+- /mnt/Transfer/PUBS/ITASSM/Outbound</pre> "]
   end
 
   %% Consumer Application Nodes
