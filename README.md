@@ -37,8 +37,7 @@ Message starts with 6 → ssimType = TYPE6
     G2A -->|Original Format| G4["Store Flight in Original Screen Format for archive<br/>"]
     
      G8["Build SSM payload<br/> Extra_Section_Schedule_File_*"]
-    G8 --> G9["Mark messages PROCESSED"]
-    G8 --> BLOB_IN["Azure Blob Container: fltinvhub-schedule"]
+    G8 --> SSMPAYLOAD["SSM ExtraSection.dat"]
   end
 
   %% Message Bus
@@ -50,10 +49,27 @@ Message starts with 6 → ssimType = TYPE6
     FA["Extra_Section_Schedule_File_20260122_010031.txt"]
   end
 
+  %% Message Bus
+  subgraph NPPortal
+    FT["aa-pubs-transmit"]
+  end
+
+  %% Consumer Application Nodes
+  subgraph EMFT
+    C1["New Configuration for SSM"]
+
+  end
+
+  %% External system
+  EXT["ITA/Google processes SSM"]
+
   %% Edges
   G3 --> SB
   G4 --> FA
   SB --> G8
+  G8 --> FT
+  FT --> C1
+  C1 --> EXT
 
 ```
 
