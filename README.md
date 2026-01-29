@@ -36,8 +36,7 @@ Message starts with 6 → ssimType = TYPE6
     G2A --> G3["Insert/Update SCHEDULE_MESSAGE<br/>(status management)"]
     G2A -->|Original Format| G4["Store Flight in Original Screen Format for archive<br/>"]
     
-     G8["Build SSM payload<br/> Extra_Section_Schedule_File_*"]
-    G8 --> SSMPAYLOAD["SSM ExtraSection.dat"]
+     G8["Build SSM payload<br/> SSMExtraSection.dat"]
   end
 
   %% Message Bus
