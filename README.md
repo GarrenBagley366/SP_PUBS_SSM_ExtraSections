@@ -54,7 +54,7 @@ Message starts with 6 → ssimType = TYPE6
 
   %% Message Bus
   subgraph NPPortal
-    FT["aa-pubs-transmit<br>manifest.dat.20260122085603"]
+    FT["aa-pubs-transmit - manifest.dat.20260122085603 - PUBS[ITASSM] - /mnt/Transfer/PUBS/ITASSM/Outbound "]
   end
 
   %% Consumer Application Nodes
