@@ -33,7 +33,12 @@ G6["Validate prerequisites<br/>- not already generated today (SCHED_FILE_PROCESS
     SB["Optional File Move and Service Bus"]
   end
 
+  subgraph DIR["/aa-pubs-extrasection"]
+    FA["Extra_Section_Schedule_File_20260122_010031.json"]
+  end
+
   %% Edges
-  G4 --> SB
+  G3 --> SB
+  G4 --> FA
 
 ```
