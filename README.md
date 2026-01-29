@@ -48,9 +48,13 @@ Message starts with 6 → ssimType = TYPE6
     FA["Extra_Section_Schedule_File_20260122_010031.txt"]
   end
 
+  subgraph DIRT["/aa-pubs-extrasection"]
+    FB["SSMExtraSection_20260122_010031.txt"]
+  end
+
   %% Message Bus
   subgraph NPPortal
-    FT["aa-pubs-transmit"]
+    FT["aa-pubs-transmit<br>manifest.dat.20260122085603"]
   end
 
   %% Consumer Application Nodes
@@ -67,6 +71,7 @@ Message starts with 6 → ssimType = TYPE6
   G4 --> FA
   SB --> G8
   G8 --> FT
+  G8 --> FB
   FT --> C1
   C1 --> EXT
 
