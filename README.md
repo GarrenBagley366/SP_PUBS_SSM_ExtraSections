@@ -8,7 +8,8 @@
 
 #### Assumptions
 * Once moved to production there is no human interaction to decide if an extra section is published, this is unlike Publications SABRE SSM
-* We may only do ADD and DELETE types 
+* We may only do ADD and DELETE types
+* We may only schedule Monday and Tuesday or just weekdays, no weekend processing.
 
 ## Flowchart
 
