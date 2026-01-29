@@ -9,7 +9,9 @@
 #### Assumptions
 * Once moved to production there is no human interaction to decide if an extra section is published, this is unlike Publications SABRE SSM
 * We may only do ADD and DELETE types
-* We may only schedule Monday and Tuesday or just weekdays, no weekend processing.
+* We may only schedule Monday and Tuesday or just weekdays, no weekend processing to avoid MRU.
+* The extra sections will not be enriched with Code share marketing data or enriched with Publications Logic.
+* Will not have a UI, will communicate via Email to a list of stakeholders
 
 ## Flowchart
 
@@ -23,20 +25,18 @@ flowchart TD
     MQ --> G1["Scheduled Trigger (cron/SpringScheduler) Consume IBM MQ messages"]
     G1 --> G2["Parse schedule message"]
     click G2 href "https://github.com/AAInternal/FltInvhub_Schedule_FileProcessor/wiki/File-Processor-Business-Rules"
-    G2 --> G3["Insert/Update SCHEDULE_MESSAGE<br/>(status management)"]
-    G2 -->|Original Format| G4["Store Flight in Original Screen Format for archive<br/>"]
-    
-
-G6["Validate prerequisites<br/>
+G2 --> G2A["Validate prerequisites<br/> - Matches Extra Section Flight Range
 <pre>
 Message starts with A → ssimType = ADD
 Message starts with D → ssimType = DELETE
 Message starts with I → ssimType = INIT
 Message starts with 6 → ssimType = TYPE6
 </pre><br/>
-- not already generated today (SCHED_FILE_PROCESSING_COMPLETED_DATE)<br/>- FLIGHT_ID not running<br/>- MRU/INIT not in progress<br/>- weekend MRU completed / INIT completed timing checks"]
-    G6 --> G7["Select PENDING messages<br/>sleep 30s<br/>re-select by clock-time window"]
-    G7 --> G8["Build JSON schedule payload<br/>Schedule_File_* or Extra_Section_Schedule_File_*"]
+- not already generated today (SCHED_FILE_PROCESSING_COMPLETED_DATE)<br/>"]
+    G2A --> G3["Insert/Update SCHEDULE_MESSAGE<br/>(status management)"]
+    G2A -->|Original Format| G4["Store Flight in Original Screen Format for archive<br/>"]
+    
+     G8["Build SSM payload<br/> Extra_Section_Schedule_File_*"]
     G8 --> G9["Mark messages PROCESSED"]
     G8 --> BLOB_IN["Azure Blob Container: fltinvhub-schedule"]
   end
@@ -47,13 +47,13 @@ Message starts with 6 → ssimType = TYPE6
   end
 
   subgraph DIR["/aa-pubs-extrasection"]
-    FA["Extra_Section_Schedule_File_20260122_010031.json"]
+    FA["Extra_Section_Schedule_File_20260122_010031.txt"]
   end
 
   %% Edges
   G3 --> SB
   G4 --> FA
-  SB --> G6
+  SB --> G8
 
 ```
 
