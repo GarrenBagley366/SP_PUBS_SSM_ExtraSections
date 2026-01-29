@@ -19,6 +19,7 @@ flowchart TD
     click G2 href "https://github.com/AAInternal/FltInvhub_Schedule_FileProcessor/wiki/File-Processor-Business-Rules"
     G2 --> G3["Insert/Update SCHEDULE_MESSAGE<br/>(status management)"]
     G2 -->|Original Format| G4["Store Flight in Original Screen Format for archive<br/>"]
+    
 
 G6["Validate prerequisites<br/>- not already generated today (SCHED_FILE_PROCESSING_COMPLETED_DATE)<br/>- FLIGHT_ID not running<br/>- MRU/INIT not in progress<br/>- weekend MRU completed / INIT completed timing checks"]
     G6 --> G7["Select PENDING messages<br/>sleep 30s<br/>re-select by clock-time window"]
@@ -27,19 +28,12 @@ G6["Validate prerequisites<br/>- not already generated today (SCHED_FILE_PROCESS
     G8 --> BLOB_IN["Azure Blob Container: fltinvhub-schedule"]
   end
 
-  %% Processor
-  subgraph PROC["FltInvhub_Schedule_FileProcessor (Azure Functions)"]
-    BLOB_IN --> P1{"Blob Trigger<br/>Schedule_File_*.json or Extra_Section_Schedule_File_*.json"}
-    P1 --> P2["Initialize reference data<br/>- FLIGHT_NBR_RANGE<br/>- SYSTEM_PARM premium economy effective date<br/>- reset endInitReceived"]
-    P2 --> P3["Parse file payload into DB params"]
-    P3 --> P4["Update CASPER tables<br/>BRD_OFF / SCHEDULE / SEGMENT_LEG_MAP"]
-
-    P4 -->|ENDINIT + minInitMessageCount| P5["EndInit actions<br/>- cleanup past/future (+ codeshare)<br/>- update WEEKLY_INIT_COMPLETED_DATE<br/>- analyze tables (stored procs)"]
-    P4 --> P6["Update SCHED_FILE_PROCESSING_COMPLETED_DATE<br/>(only Schedule_File_*)"]
-    P6 --> BLOB_ARC["Azure Blob Container: fltinvhub-schedule-archive"]
-    P4 --> P7["Validate OA code populated for all flights in SCHEDULE"]
-    P4 --> P8["Create Thruflight messages"]
-    P8 --> EH["Event Hub topic (output binding)"]
+  %% Message Bus
+  subgraph NPPortal
+    SB["Optional File Move and Service Bus"]
   end
+
+  %% Edges
+  G4 --> SB
 
 ```
