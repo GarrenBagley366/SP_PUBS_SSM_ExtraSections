@@ -26,7 +26,14 @@ flowchart TD
     G2 -->|Original Format| G4["Store Flight in Original Screen Format for archive<br/>"]
     
 
-G6["Validate prerequisites<br/>- not already generated today (SCHED_FILE_PROCESSING_COMPLETED_DATE)<br/>- FLIGHT_ID not running<br/>- MRU/INIT not in progress<br/>- weekend MRU completed / INIT completed timing checks"]
+G6["Validate prerequisites<br/>
+<pre>
+Message starts with A → ssimType = ADD
+Message starts with D → ssimType = DELETE
+Message starts with I → ssimType = INIT
+Message starts with 6 → ssimType = TYPE6
+</pre><br/>
+- not already generated today (SCHED_FILE_PROCESSING_COMPLETED_DATE)<br/>- FLIGHT_ID not running<br/>- MRU/INIT not in progress<br/>- weekend MRU completed / INIT completed timing checks"]
     G6 --> G7["Select PENDING messages<br/>sleep 30s<br/>re-select by clock-time window"]
     G7 --> G8["Build JSON schedule payload<br/>Schedule_File_* or Extra_Section_Schedule_File_*"]
     G8 --> G9["Mark messages PROCESSED"]
