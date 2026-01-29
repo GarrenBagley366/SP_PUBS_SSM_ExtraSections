@@ -60,14 +60,9 @@ Message starts with 6 → ssimType = TYPE6
 
 ## Discussion Points
 
-- ** What Protocol is the Google Endpoint?  Will there be WhiteListing and/or firewall holes punched? Is there any resource to contact? Are there any current examples of this functionality currently in AA? **
-- How will error handling and retries be managed?
-- Are there SLAs for message processing latency?
-- *Should Any Manual Intervention take place to process a message to Google? Totally Automatic?*
-- Any implications for failure in Service Bus delivery?
+- ** We will need ITA contact/interface for developing the SFTP formats and validation. **
+- Will ITA have an error reporting system?
 - When will we get our SabreMQueue?  Do we own it? Is it ours?
-- **Should we Reuse this SP_PUBS_SSM_SWS_API or duplicate it? Duplication means duplicating a lot of boilerplate code.**
-- How about an email copy of every update? To whom would this go?
 
 ### This is an example of an extra section from the SabreMQ in Casper's json message formatting.
 
