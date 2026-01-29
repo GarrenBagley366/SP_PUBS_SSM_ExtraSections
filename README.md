@@ -30,7 +30,7 @@ G6["Validate prerequisites<br/>- not already generated today (SCHED_FILE_PROCESS
 
   %% Message Bus
   subgraph ServiceBus
-    SB["Optional File Move and Service Bus"]
+    SB["Optional File Move and Service Bus message<br>if breaking SP_PUBS_SSM_ExtraSections into two instances "]
   end
 
   subgraph DIR["/aa-pubs-extrasection"]
