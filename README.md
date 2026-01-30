@@ -9,7 +9,7 @@
 #### Assumptions
 * Once moved to production there is no human interaction to decide if an extra section is published, this is unlike Publications SABRE SSM
 * We may only do ADD and DELETE types
-* We may only schedule Monday and Tuesday or just weekdays, no weekend processing to avoid MRU.
+* We may only schedule Monday and Tuesday or just weekdays, no weekend processing to avoid MRU.  Casper seems to grab each day's changes at 1:00Central, but they are processing everything EXCEPT extra sections.
 * The extra sections will not be enriched with Code share marketing data or enriched with Publications Logic.
 * Will not have a UI, will communicate via Email to a list of stakeholders
 
