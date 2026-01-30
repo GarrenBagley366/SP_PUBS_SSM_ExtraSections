@@ -87,6 +87,7 @@ Message starts with 6 → ssimType = TYPE6
 - ** We will need ITA contact/interface for developing the SFTP formats and validation. **
 - Will ITA have an error reporting system?
 - When will we get our SabreMQueue?  Do we own it? Is it ours?
+- We need discussion about this datasource with the IOC
 
 ### This is an example of an extra section from the SabreMQ in Casper's json message formatting.
 
